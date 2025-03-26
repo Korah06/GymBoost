@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym_boost/data/model/login_data.dart';
 import 'package:gym_boost/ui/login/view_model/login_view_model.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -13,8 +14,13 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: ListenableBuilder(
-          listenable: viewModel,
+          listenable: viewModel.login,
           builder: (BuildContext context, _) {
+            if (viewModel.login.isRunning) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -39,12 +45,10 @@ class LoginScreen extends StatelessWidget {
                               controller: passwordController,
                             ),
                             ElevatedButton(
-                              onPressed: () {
-                                viewModel.login(
-                                  emailController.text,
-                                  passwordController.text,
-                                );
-                              },
+                              onPressed: () => viewModel.login.execute(
+                                  LoginData(
+                                      email: emailController.text,
+                                      password: passwordController.text)),
                               child: const Text('Login'),
                             ),
                           ],
