@@ -9,6 +9,11 @@ class LoginScreen extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  LoginData get loginData => LoginData(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,10 +50,8 @@ class LoginScreen extends StatelessWidget {
                               controller: passwordController,
                             ),
                             ElevatedButton(
-                              onPressed: () => viewModel.login.execute(
-                                  LoginData(
-                                      email: emailController.text,
-                                      password: passwordController.text)),
+                              onPressed: () =>
+                                  viewModel.login.execute(loginData),
                               child: const Text('Login'),
                             ),
                           ],
