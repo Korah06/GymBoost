@@ -1,0 +1,20 @@
+{
+  "buildFiles": [
+    "/Users/marioespasaplanells/dev/flutter/packages/flutter_tools/gradle/src/main/groovy/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/marioespasaplanells/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/Users/marioespasaplanells/dev/devit-projects/gym-boost/android/app/.cxx/Debug/3o6u284l/armeabi-v7a",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/marioespasaplanells/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/Users/marioespasaplanells/dev/devit-projects/gym-boost/android/app/.cxx/Debug/3o6u284l/armeabi-v7a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {}
+}

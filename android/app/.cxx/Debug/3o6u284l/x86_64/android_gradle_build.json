@@ -1,0 +1,28 @@
+{
+  "buildFiles": [
+    "/Users/marioespasaplanells/dev/flutter/packages/flutter_tools/gradle/src/main/groovy/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/marioespasaplanells/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/Users/marioespasaplanells/dev/devit-projects/gym-boost/android/app/.cxx/Debug/3o6u284l/x86_64",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/marioespasaplanells/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/Users/marioespasaplanells/dev/devit-projects/gym-boost/android/app/.cxx/Debug/3o6u284l/x86_64",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {},
+  "toolchains": {
+    "toolchain": {
+      "cCompilerExecutable": "/Users/marioespasaplanells/Library/Android/sdk/ndk/26.3.11579264/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang.lld",
+      "cppCompilerExecutable": "/Users/marioespasaplanells/Library/Android/sdk/ndk/26.3.11579264/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++.lld"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": []
+}
