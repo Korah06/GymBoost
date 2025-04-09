@@ -37,14 +37,14 @@ class GlassCard extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: color.withValues(alpha: 0.15),
+                  color: color.withValues(alpha: 0.10),
                   width: 1,
                 ),
                 borderRadius: border,
                 gradient: LinearGradient(
                   colors: [
-                    color.withValues(alpha: 0.5),
-                    color.withValues(alpha: 0.2),
+                    color.withValues(alpha: 0.4),
+                    color.withValues(alpha: 0.1),
                   ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
@@ -53,7 +53,7 @@ class GlassCard extends StatelessWidget {
             ),
 
             //CHILDREN
-            child ?? const SizedBox(),
+            Center(child: child,)
           ],
         ),
       ),

@@ -30,7 +30,7 @@ class LoginScreen extends StatelessWidget {
             return const Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                GlassCard(color: Colors.blue,),
+                GlassCard(color: Colors.green, child: Text("data"),),
                 // Padding(
                 //   padding: const EdgeInsets.all(8.0),
                 //   child: Card(
