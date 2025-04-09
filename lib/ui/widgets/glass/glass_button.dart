@@ -8,6 +8,7 @@ class GlassButton extends StatelessWidget {
   final Color color;
   final Widget child;
   final VoidCallback onTap;
+  final bool isLoading;
 
   const GlassButton({
     super.key,
@@ -17,6 +18,7 @@ class GlassButton extends StatelessWidget {
     this.color = Colors.white,
     required this.child,
     required this.onTap,
+    this.isLoading = false,
   });
 
   @override
@@ -61,7 +63,17 @@ class GlassButton extends StatelessWidget {
                 borderRadius: border,
                 splashColor: color.withValues(alpha: 0.2),
                 highlightColor: color.withValues(alpha: 0.1),
-                child: Center(child: child),
+                child: Center(
+                    child: isLoading
+                        ? Row(
+                            spacing: 10,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CircularProgressIndicator(color: color,),
+                              child,
+                            ],
+                          )
+                        : child),
               ),
             ),
           ],

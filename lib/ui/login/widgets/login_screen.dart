@@ -15,11 +15,11 @@ class LoginScreen extends StatelessWidget {
         child: ListenableBuilder(
           listenable: viewModel.login,
           builder: (BuildContext context, _) {
-            if (viewModel.login.isRunning) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
+            // if (viewModel.login.isRunning) {
+            //   return const Center(
+            //     child: CircularProgressIndicator(),
+            //   );
+            // }
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -55,6 +55,7 @@ class LoginScreen extends StatelessWidget {
                             GlassButton(
                               width: double.infinity,
                               color: Colors.lightBlue,
+                              isLoading: viewModel.login.isRunning,
                               onTap: () {
                                 if (viewModel.validateForm(context)) {
                                   viewModel.login.execute();

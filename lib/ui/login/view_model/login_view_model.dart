@@ -49,6 +49,8 @@ class LoginViewModel extends ChangeNotifier {
         email: loginData.email,
         password: loginData.password,
       );
+      // Simulate a delay for demonstration purposes
+      await Future.delayed(const Duration(seconds: 2));
       return const Result.ok(true);
     } on Exception catch (e) {
       return Result.error(e);

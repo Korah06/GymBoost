@@ -28,10 +28,10 @@ typedef CommandAction1<T, A> = Future<Result<T>> Function(A);
 abstract class Command<T> extends ChangeNotifier {
   Command();
 
-  bool _idRunning = false;
+  bool _isRunning = false;
 
   /// True when the action is running.
-  bool get isRunning => _idRunning;
+  bool get isRunning => _isRunning;
 
   Result<T>? _result;
 
@@ -54,18 +54,18 @@ abstract class Command<T> extends ChangeNotifier {
   Future<void> _execute(CommandAction0<T> action) async {
     // Ensure the action can't launch multiple times.
     // e.g. avoid multiple taps on button
-    if (_idRunning) return;
+    if (_isRunning) return;
 
     // Notify listeners.
     // e.g. button shows loading state
-    _idRunning = true;
+    _isRunning = true;
     _result = null;
     notifyListeners();
 
     try {
       _result = await action();
     } finally {
-      _idRunning = false;
+      _isRunning = false;
       notifyListeners();
     }
   }
