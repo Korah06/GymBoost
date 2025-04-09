@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gym_boost/data/model/login_data.dart';
 import 'package:gym_boost/ui/login/view_model/login_view_model.dart';
+import 'package:gym_boost/ui/widgets/glass/glass_button.dart';
 import 'package:gym_boost/ui/widgets/glass/glass_card.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -27,10 +28,47 @@ class LoginScreen extends StatelessWidget {
                 child: CircularProgressIndicator(),
               );
             }
-            return const Column(
+            return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                GlassCard(color: Colors.green, child: Text("data"),),
+                Center(
+                  child: GlassCard(
+                    height: 400,
+                    width: 300,
+                    color: Colors.grey,
+                    child: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        spacing: 20,
+                        children: [
+                          Form(
+                            child: Column(
+                              children: [
+                                TextFormField(),
+                                TextFormField(),
+                              ],
+                            ),
+                          ),
+                          GlassButton(
+                            width: double.infinity,
+                            color: Colors.lightBlue,
+                            onTap: () {
+                              print("Glass button tapped");
+                            },
+                            child: const Text(
+                              "Click Me",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+
                 // Padding(
                 //   padding: const EdgeInsets.all(8.0),
                 //   child: Card(
