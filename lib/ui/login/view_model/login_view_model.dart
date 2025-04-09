@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:gym_boost/data/model/login_data.dart';
 import 'package:gym_boost/data/repositories/auth_repository.dart';
 import 'package:gym_boost/utils/Result.dart';
@@ -7,28 +7,60 @@ import 'package:gym_boost/utils/command.dart';
 class LoginViewModel extends ChangeNotifier {
   LoginViewModel({required AuthRepository authRepository})
       : _authRepository = authRepository {
-    login = Command1(_login);
+    login = Command0(_login);
   }
 
   final AuthRepository _authRepository;
 
-  String? _email;
-  String? _password;
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
-  late Command1<void,LoginData> login;
+  late Command0<void> login;
 
-  Future<Result> _login(LoginData data) async {
+  String? validateEmail(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your email';
+    }
+    if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+      return 'Enter a valid email';
+    }
+    return null;
+  }
+
+  bool validateForm(BuildContext context) {
+    if (formKey.currentState?.validate() ?? false) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Processing Data')),
+      );
+      return true;
+    }
+    return false;
+  }
+
+  LoginData get loginData => LoginData(
+    email: emailController.text.trim(),
+    password: passwordController.text,
+  );
+
+  Future<Result> _login() async {
     try {
-      _email = data.email;
-      _password = data.password;
-      await _authRepository.login(email: _email!, password: _password!);
-      await Future.delayed(const Duration(seconds: 5));
+      await _authRepository.login(
+        email: loginData.email,
+        password: loginData.password,
+      );
       return const Result.ok(true);
-    } on Exception catch (_, e) {
-      return Result.error(e as Exception);
+    } on Exception catch (e) {
+      return Result.error(e);
     } finally {
       notifyListeners();
     }
   }
 
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 }
