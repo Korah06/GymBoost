@@ -10,11 +10,31 @@ class LoginScreen extends StatelessWidget {
   final LoginViewModel viewModel;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   LoginData get loginData => LoginData(
         email: emailController.text,
         password: passwordController.text,
       );
+
+  String? emailValidation(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your email';
+    }
+    if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+      return 'Enter a valid email';
+    }
+    return null;
+  }
+
+  void _submitForm() {
+    if (formKey.currentState!.validate()) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Processing Data')),
+      );
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -43,10 +63,26 @@ class LoginScreen extends StatelessWidget {
                         spacing: 20,
                         children: [
                           Form(
+                            key: formKey,
                             child: Column(
                               children: [
-                                TextFormField(),
-                                TextFormField(),
+                                TextFormField(
+                                  decoration: const InputDecoration(
+                                      labelText: 'Email',
+                                      hintText: 'email@example.com'),
+                                  controller: emailController,
+                                  keyboardType: TextInputType.emailAddress,
+                                  validator: (value) {
+                                    return emailValidation(value);
+                                  },
+                                ),
+                                TextFormField(
+                                  decoration: const InputDecoration(
+                                    labelText: 'Password',
+                                  ),
+                                  controller: passwordController,
+                                  obscureText: true,
+                                ),
                               ],
                             ),
                           ),
@@ -54,10 +90,10 @@ class LoginScreen extends StatelessWidget {
                             width: double.infinity,
                             color: Colors.lightBlue,
                             onTap: () {
-                              print("Glass button tapped");
+                              viewModel.login.execute(loginData);
                             },
                             child: const Text(
-                              "Click Me",
+                              "Login",
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold),
@@ -68,38 +104,6 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-
-                // Padding(
-                //   padding: const EdgeInsets.all(8.0),
-                //   child: Card(
-                //     elevation: 15,
-                //     child: Padding(
-                //       padding: const EdgeInsets.all(16),
-                //       child: Form(
-                //         child: Column(
-                //           children: [
-                //             TextField(
-                //               decoration: const InputDecoration(
-                //                   labelText: 'Email',
-                //                   hintText: 'email@example.com'),
-                //               controller: emailController,
-                //             ),
-                //             TextField(
-                //               decoration:
-                //                   const InputDecoration(labelText: 'Password'),
-                //               controller: passwordController,
-                //             ),
-                //             ElevatedButton(
-                //               onPressed: () =>
-                //                   viewModel.login.execute(loginData),
-                //               child: const Text('Login'),
-                //             ),
-                //           ],
-                //         ),
-                //       ),
-                //     ),
-                //   ),
-                // )
               ],
             );
           },
