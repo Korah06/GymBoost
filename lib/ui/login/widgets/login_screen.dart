@@ -32,7 +32,7 @@ class LoginScreen extends StatelessWidget {
                       children: [
                         ValueListenableBuilder(
                           valueListenable: viewModel.emailLabel,
-                          builder: (context, value, child) => TextFormField(
+                          builder: (_, value, __) => TextFormField(
                             decoration: InputDecoration(
                               labelText: value,
                               hintText: 'email@example.com',
@@ -51,7 +51,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                         ValueListenableBuilder(
                           valueListenable: viewModel.isLoading,
-                          builder:(context, value, child) => GlassButton(
+                          builder:(_, value, __) => GlassButton(
                             width: double.infinity,
                             color: Colors.lightBlue,
                             isLoading: value,
