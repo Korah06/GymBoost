@@ -33,7 +33,8 @@ class GymBoost extends StatelessWidget {
       // routes: Routes.routes,
       // initialRoute: login,
       home: LoginScreen(
-        viewModel: LoginViewModel(authRepository: authRepository),
+        // viewModel: LoginViewModel(authRepository: authRepository),
+        viewModel: LoginViewModel(),
       ),
     );
   }
